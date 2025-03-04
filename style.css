@@ -18,6 +18,10 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.text_boks {
+  align-content: center;
+  justify-items: center;
+}
 button {
   background-color: var(--color-bg-button);
   color: var(--color-text-button);
@@ -25,7 +29,7 @@ button {
   padding: 1rem;
 }
 h1 {
-  font-size: large;
+  font-size: 8rem;
   color: var(--color-heading);
 }
 p {
