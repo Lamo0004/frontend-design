@@ -19,11 +19,11 @@
 
 /* Kort med billeder skal have nul padding, men deres indhold skal matche padding’en fra de øvrige kort. */
 .card:has(img) {
-  padding: 0rem; /* Nulstil padding på indholdet af kortet med billede */
+  padding: 0rem;
 }
 
 .card:has(img) .content {
-  padding: 1rem; /* Nulstil padding på indholdet af kortet med billede */
+  padding: 1rem;
 }
 
 @layer reset, cards;
