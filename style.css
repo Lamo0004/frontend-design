@@ -1,4 +1,17 @@
 article {
-    max-width: 65ch;
-    margin-inline: auto;
+  display: grid;
+  grid-template-columns: [full-start] 1fr [content-start] minmax(0, 65ch) [content-end] 1fr [full-end];
+
+  > * {
+    grid-column: content-start/content-end;
+  }
+}
+
+img {
+  grid-column: full-start/full-end;
+}
+
+blockquote {
+  grid-column: full-start/full-end;
+  padding-inline: 10%;
 }
