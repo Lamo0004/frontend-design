@@ -1,5 +1,5 @@
 .bento {
-  margin-inline: max(1rem);
+  margin-inline: 10;
   display: grid;
   gap: var(--spacing-base);
   grid-auto-columns: 1fr;
@@ -16,54 +16,92 @@
       "list tag";
   }
 
+  > * {
+    border-radius: var(--border-radius);
+    background: var(--bg);
+    padding: var(--spacing-base);
+    overflow: clip;
+    &:has(img) {
+      padding: 0;
+    }
+  }
+
+  img {
+    block-size: 100%;
+    padding: 0;
+    align-self: stretch;
+    object-fit: cover;
+  }
+
   .title {
     --bg: var(--color-brand-yellow);
-    grid-area: "title";
+    container-type: inline-size;
+    grid-area: title;
+    display: grid;
+
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      @container (width < 400px) {
+        display: contents;
+        > p:first-of-type {
+          order: -1;
+          margin-bottom: 1rlh;
+        }
+      }
+    }
+    h2 {
+      font-size: clamp(2rem, 15cqw, 4rem);
+    }
+  }
+
+  .image-1 {
+    grid-area: cup;
+    display: grid;
+    grid: "stack";
+    justify-items: center;
+    align-items: end;
+    color: var(--color-text-accent);
+    > * {
+      grid-area: stack;
+      &:not(img) {
+        margin: var(--spacing-base);
+      }
+    }
+    p:first-of-type {
+      align-self: start;
+    }
+  }
+
+  .image-2 {
+    grid-area: man;
   }
 
   .list {
     --bg: var(--color-brand-coffee);
-    grid-area: "list";
-  }
+    color: #fff;
+    grid-area: list;
+    list-style: none;
+    font-size: 2rem;
+    line-height: 1.5;
+    display: grid;
+    place-content: center;
 
-  .image-1 {
-    color: var(--color-text-accent);
-    grid-area: "cup";
-  }
-
-  .image-2 {
-    grid-area: "man";
+    .highlight {
+      color: var(--color-menu-highlight);
+      &::before {
+        content: "⚡";
+        margin-right: 10px;
+      }
+    }
   }
 
   .tag {
     --bg: var(--color-brand-olive);
-    font-size: 2rem;
-    line-height: 1.2;
-    grid-area: "tag";
+    grid-area: tag;
   }
-}
-
-.card {
-  border-radius: var(--border-radius);
-  background: var(--bg);
-  overflow: clip;
-  container-type: inline-size;
-
-  &:not(:has(img)) {
-    padding: var(--spacing-base);
-  }
-}
-
-h2 {
-  font-size: 4rem;
-  line-height: 1.1;
-  color: var(--color-text-dark);
-  margin-bottom: var(--spacing-base);
-}
-
-.website {
-  font-size: 1.2rem;
-  margin-top: auto;
 }
 
 @layer {
@@ -92,5 +130,40 @@ h2 {
     --border-radius: 24px;
     --spacing-base: 20px;
     --spacing-large: 40px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--color-background-dark);
+    font-family: Arial, sans-serif;
+    padding: var(--spacing-base);
+  }
+
+  img {
+    max-inline-size: 100%;
+    block-size: auto;
+    display: block;
+  }
+
+  h2 {
+    display: grid;
+    font-size: 4rem;
+    line-height: 1.1;
+    color: var(--color-text-dark);
+    margin-bottom: var(--spacing-base);
+  }
+  .tag {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .website {
+    font-size: 1.2rem;
+    margin-top: auto;
   }
 }
