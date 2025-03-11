@@ -15,6 +15,28 @@ const { cardContent } = Astro.props;
 
 <style>
   ul {
-    list-style: none;
+    grid-column: 1 / -1;
+    scroll-snap-type: inline mandatory; /* stopper scrolling */
+
+    list-style: none; 
+    display: flex;
+    gap: var(--card-gap);
+    overflow-x: auto;
+
+    padding-inline: max(20px, 50% - var(--content-width) / 2);
+    scroll-padding-inline-start: max(20px, 50% - var(--content-width) / 2); /* Udgangspunktet i scroll */
+
+    li {
+      flex-basis: min(90%, 400px);
+      flex-shrink: 0;
+
+      scroll-snap-align: start; /* Hvor den placerer kortet vd stop scroll */
+
+      padding: var(--card-padding);
+      background-color: var(--card-background);
+      color: var(--card-text-color);
+      border-radius: var(--card-border-radius);
+    }
   }
+
 </style>
