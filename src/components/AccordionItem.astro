@@ -4,7 +4,7 @@ const { exclusive, ...props } = Astro.props;
 const { id, question, answer, linkBlock } = props;
 ---
 
-<details {id}>
+ <details {id} name="a"> <!-- tilføjer navn for automatisk lukning, når en anden åbnes -->
   <summary>
     <span>
       {question}
@@ -28,6 +28,27 @@ const { id, question, answer, linkBlock } = props;
     color: hsl(190 30% 12%);
     border-bottom: 1px solid #dadada;
 
+    /* Angiver at brugeren ikke har angivet nogen bevægelses/animations præferencer på sin enheden  */
+    @media (prefers-reduced-motion: no-preference) {
+      interpolate-size: allow-keywords; /* Aktiverer animation mellem to værdier (størrelsesændring) – understøttes IKKE i Safari og Firefox*/
+    }
+
+    /* Styling af content lukket */
+    &::details-content {
+      block-size: 0; /* Ingen højde */
+      overflow-y: clip;
+      transition: content-visibility 1s allow-discrete, block-size 1s; /* animation på synlighed på teksten og højden af containeren – begge tager 1 sekund */
+    }
+
+    /* Styling af content åben */
+    &[open]::details-content {
+      block-size: auto; /* Automatisk højde */
+    }
+
+    /* Styling af ikon åben */
+    &[open] {
+      --r: z 90deg; /* Animation af + til -  */
+    }
     summary {
       font-weight: 700;
       color: #181818;
@@ -51,6 +72,7 @@ const { id, question, answer, linkBlock } = props;
         gap: 1rem;
         justify-content: space-between;
 
+
         svg {
           inline-size: auto;
           height: 1lh;
@@ -58,9 +80,11 @@ const { id, question, answer, linkBlock } = props;
         }
       }
     }
+    
 
     .answer {
       color: #595566;
+      transition: height 0.3s ease, opacity 0.3s ease;
 
       > * + * {
         margin-top: 1em;
